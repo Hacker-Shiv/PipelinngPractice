@@ -23,12 +23,11 @@ pipeline {
                        git 'https://github.com/prithvi8117/PipelinngPractice'
                     }
                  }
-                 stage('Four : Compile'){
-                     tools {
-                        gradle 'gradle4'
-                     }
+                 stage('Four : Compile and execute'){
                      steps {
-                        sh 'gradle clean compileJava test1'
+                        echo "Great we are compiling the java code"
+                        sh 'javac test1.java'
+                        sh 'java test1'
                      }
                  }
                  stage('Five') {
