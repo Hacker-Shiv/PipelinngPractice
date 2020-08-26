@@ -9,8 +9,6 @@ pipeline {
                  stage('Two') {
                     steps {
                       input('Do you want to proceed?')
-                      sh 'javac /home/ec2-user/java_programs/hello.java'
-                      sh 'java /home/ec2-user/java_programs/hello'
                     }
                  }
                  stage('Three') {
@@ -22,9 +20,18 @@ pipeline {
                     steps {
                        echo "Hello"
                        echo "We are in stage three's steps"
+                       git 'https://github.com/prithvi8117/PipelinngPractice'
                     }
                  }
-                 stage('Four') {
+                 stage('Four : Compile'){
+                     tools {
+                        gradle 'gradle4'
+                     }
+                     steps {
+                        sh 'gradle clean compileJava test1'
+                     }
+                 }
+                 stage('Five') {
                     parallel { 
                             stage('Unit Test') {
                               steps {
@@ -36,7 +43,7 @@ pipeline {
                                 echo "Running the integration test..."
                               }
                             }
-                   }
+                    }
                 }
           }
 }
