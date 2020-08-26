@@ -19,13 +19,13 @@ pipeline {
                     }
                     steps {
                        echo "Hello"
-                       echo "We are in stage three's steps"
+                       echo "We are in stage three's steps: We are in the git repository PipelinngPractice"
                        git 'https://github.com/prithvi8117/PipelinngPractice'
                     }
                  }
                  stage('Four : Compile and execute'){
                      steps {
-                        echo "Great we are compiling the java code"
+                        echo "Great we are compiling the java code : test1.java"
                         sh 'javac test1.java'
                         sh 'java test1'
                      }
