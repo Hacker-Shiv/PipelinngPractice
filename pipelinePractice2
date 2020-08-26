@@ -1,0 +1,42 @@
+pipeline {
+         agent any
+         stages {
+                 stage('One') {
+                    steps {
+                      echo 'Hi, I am Prithvi Raj Karki from Chandigarh University'
+                    }
+                 }
+                 stage('Two') {
+                    steps {
+                      input('Do you want to proceed?')
+                      sh 'javac /home/ec2-user/java_programs/hello.java'
+                      sh 'java /home/ec2-user/java_programs/hello'
+                    }
+                 }
+                 stage('Three') {
+                    when {
+                       not {
+                            branch "master"
+                       }
+                    }
+                    steps {
+                       echo "Hello"
+                       echo "We are in stage three's steps"
+                    }
+                 }
+                 stage('Four') {
+                    parallel { 
+                            stage('Unit Test') {
+                              steps {
+                                echo "Running the unit test..."
+                              }
+                            }
+                            stage('Integration test') {
+                              steps {
+                                echo "Running the integration test..."
+                              }
+                            }
+                   }
+                }
+          }
+}
